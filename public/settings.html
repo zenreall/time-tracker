@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Settings &middot; Time Tracker</title>
+  <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <nav class="top-nav">
+    <div class="top-nav-inner">
+      <a href="/" class="top-nav-link">Time Tracker</a>
+      <a href="/recap" class="top-nav-link">Recap</a>
+      <a href="/projects" class="top-nav-link">Projects</a>
+      <a href="/settings" class="top-nav-link active">Settings</a>
+    </div>
+  </nav>
+  <header class="app-header">
+    <h1>Settings</h1>
+    <p class="subtitle">Work schedule over time &middot; saved to <code>data/settings.json</code></p>
+  </header>
+
+  <main>
+    <section class="card">
+      <h2>Add Period</h2>
+      <form id="settingsForm" class="form-row">
+        <div class="date-field date-picker" id="settingsDateField">
+          <label for="settingsEffectiveDate">Effective from</label>
+          <input type="text" id="settingsEffectiveDate" class="date-picker-input" required readonly autocomplete="off" placeholder="Select date" />
+          <div class="date-picker-popup" id="settingsDatePopup" hidden></div>
+        </div>
+        <label>
+          Hours per day
+          <input type="number" id="settingsHoursPerDay" min="0.5" max="24" step="0.5" value="8" required />
+        </label>
+        <div class="weekday-field">
+          Work days
+          <div class="weekday-toggle-group" id="addWeekdayGroup"></div>
+          <span class="weekday-count" id="addDayCount"></span>
+        </div>
+        <div class="form-actions">
+          <button type="submit">Add Period</button>
+          <span id="settingsFormError" class="error" role="alert"></span>
+        </div>
+      </form>
+      <table id="settingsTable">
+        <thead>
+          <tr>
+            <th>Effective from</th>
+            <th>Hours/day</th>
+            <th>Work days</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody id="settingsBody">
+          <tr><td colspan="4" class="empty">No settings periods yet.</td></tr>
+        </tbody>
+      </table>
+    </section>
+  </main>
+
+  <script src="common.js"></script>
+  <script src="settings.js"></script>
+</body>
+</html>

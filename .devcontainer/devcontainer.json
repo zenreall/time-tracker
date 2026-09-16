@@ -1,0 +1,16 @@
+{
+  "name": "Time Tracker",
+  "image": "mcr.microsoft.com/devcontainers/javascript-node:24-bookworm",
+  "postCreateCommand": "npm install",
+  "forwardPorts": [3000],
+  "portsAttributes": {
+    "3000": {
+      "label": "Time Tracker",
+      "onAutoForward": "openBrowser"
+    }
+  },
+  "extensions": [
+    "anthropic.claude-code",
+    "eamodio.gitlens"
+  ]
+}

@@ -1,0 +1,9 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(node -c server.js)",
+      "Bash(node -e \"new Function\\(require\\('fs'\\).readFileSync\\('public/app.js','utf8'\\)\\); console.log\\('app.js OK'\\)\")",
+      "Bash(node -e \"new Function\\(require\\('fs'\\).readFileSync\\('public/style.css','utf8'\\)\\)\")"
+    ]
+  }
+}

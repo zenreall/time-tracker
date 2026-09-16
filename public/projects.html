@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Projects &middot; Time Tracker</title>
+  <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <nav class="top-nav">
+    <div class="top-nav-inner">
+      <a href="/" class="top-nav-link">Time Tracker</a>
+      <a href="/recap" class="top-nav-link">Recap</a>
+      <a href="/projects" class="top-nav-link active">Projects</a>
+      <a href="/settings" class="top-nav-link">Settings</a>
+    </div>
+  </nav>
+  <header class="app-header">
+    <h1>Projects</h1>
+    <p class="subtitle">Manage projects &middot; saved to <code>data/projects.csv</code></p>
+  </header>
+
+  <main>
+    <section class="card">
+      <h2>Add Project</h2>
+      <form id="projectForm" class="form-row">
+        <label class="grow">
+          Name
+          <input type="text" id="projectName" placeholder="Acme Website" required />
+        </label>
+        <label>
+          Color
+          <input type="color" id="projectColor" value="#2a78d6" />
+        </label>
+        <label class="checkbox-label">
+          <input type="checkbox" id="projectIpBox" />
+          IP Box
+        </label>
+        <div class="form-actions">
+          <button type="submit">Add Project</button>
+          <span id="projectFormError" class="error" role="alert"></span>
+        </div>
+      </form>
+      <table id="projectsTable">
+        <thead>
+          <tr>
+            <th class="sortable" data-sort="project_name">Name</th>
+            <th>Color</th>
+            <th>IP Box</th>
+            <th class="sortable" data-sort="archived">Archived</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody id="projectsBody">
+          <tr><td colspan="5" class="empty">No projects yet.</td></tr>
+        </tbody>
+      </table>
+    </section>
+  </main>
+
+  <script src="common.js"></script>
+  <script src="projects.js"></script>
+</body>
+</html>

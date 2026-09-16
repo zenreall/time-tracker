@@ -1,0 +1,19 @@
+node_modules/
+
+# Local time-tracking data (private CSV entries) — never commit these.
+# See mock-data/ for the fictional sample data that IS checked in.
+data/
+
+# Standalone executables produced by `npm run build` (see scripts/build.js).
+dist/
+
+# Logs
+*.log
+npm-debug.log*
+
+# Environment variables
+.env
+
+# OS / editor cruft
+.DS_Store
+Thumbs.db

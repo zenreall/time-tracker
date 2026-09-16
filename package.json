@@ -1,0 +1,23 @@
+{
+  "name": "time-tracker",
+  "version": "1.0.0",
+  "description": "Local time tracker backed by a CSV file",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "build": "node scripts/build.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "dependencies": {
+    "csv-parse": "^7.0.2",
+    "csv-stringify": "^6.8.3",
+    "express": "^5.2.1"
+  },
+  "devDependencies": {
+    "@yao-pkg/pkg": "^6.22.0"
+  }
+}

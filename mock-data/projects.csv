@@ -1,0 +1,8 @@
+id,project_name,color,ip_box,archived
+1,Website Redesign,#2a78d6,false,false
+2,Mobile App,#eb6834,false,false
+3,Client Support,#1baf7a,true,false
+4,Internal Tooling,#eda100,false,false
+5,Team Meetings,#8854d0,false,false
+6,Lunch,#e8598a,false,false
+7,Old Marketing Site,#999999,false,true

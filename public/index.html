@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Time Tracker</title>
+  <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <nav class="top-nav">
+    <div class="top-nav-inner">
+      <a href="/" class="top-nav-link active">Time Tracker</a>
+      <a href="/recap" class="top-nav-link">Recap</a>
+      <a href="/projects" class="top-nav-link">Projects</a>
+      <a href="/settings" class="top-nav-link">Settings</a>
+    </div>
+  </nav>
+  <header class="app-header">
+    <h1>Time Tracker</h1>
+    <p class="subtitle">Local time tracker &middot; saved to <code>data/entries.csv</code></p>
+  </header>
+
+  <main>
+    <section class="card week-card">
+      <div class="week-header">
+        <h2 id="weekTitle">This Week</h2>
+        <div class="week-nav">
+          <button type="button" class="secondary" id="prevWeekBtn">&larr; Prev</button>
+          <div class="period-range-picker" id="weekRangeField">
+            <button type="button" id="weekRangeLabel" class="week-range period-range-trigger"></button>
+            <div class="date-picker-popup" id="weekRangePopup" hidden></div>
+          </div>
+          <button type="button" class="secondary" id="nextWeekBtn">Next &rarr;</button>
+          <button type="button" class="secondary this-period-btn" id="thisWeekBtn">This week</button>
+        </div>
+      </div>
+      <span id="calendarError" class="error" role="alert"></span>
+      <div class="calendar-scroll">
+        <div class="calendar-grid" id="calendarGrid"></div>
+      </div>
+    </section>
+
+    <section class="card summary-card">
+      <h2>Summary</h2>
+      <div class="summary-grid">
+        <div>
+          <span class="summary-label">Today</span>
+          <span class="summary-value" id="summaryToday">0h 0m</span>
+        </div>
+        <div>
+          <span class="summary-label">This week total</span>
+          <span class="summary-value" id="summaryWeek">0h 0m</span>
+        </div>
+      </div>
+      <ul id="summaryProjects" class="project-list"></ul>
+    </section>
+  </main>
+
+  <dialog id="entryModal" class="entry-modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3 id="modalTitle">New Entry</h3>
+        <div class="modal-header-actions">
+          <div class="modal-options" id="modalOptionsWrapper" hidden>
+            <button type="button" id="modalOptionsBtn" class="modal-icon-btn" aria-haspopup="true" aria-expanded="false" aria-label="More options">&#8942;</button>
+            <div id="modalOptionsMenu" class="modal-options-menu" hidden>
+              <button type="button" id="modalDuplicateBtn" class="modal-options-item">Duplicate</button>
+              <button type="button" id="modalDeleteBtn" class="modal-options-item modal-options-item-danger">Delete</button>
+            </div>
+          </div>
+          <button type="button" id="modalCloseBtn" class="modal-close" aria-label="Close">&times;</button>
+        </div>
+      </div>
+      <form id="modalEntryForm">
+        <div class="form-row">
+          <div class="date-field date-picker" id="modalDateField">
+            <label for="modalDate">Date</label>
+            <input type="text" id="modalDate" class="date-picker-input" required readonly autocomplete="off" placeholder="Select date" />
+            <div class="date-picker-popup" id="modalDatePopup" hidden></div>
+          </div>
+        </div>
+        <div class="form-row">
+          <label>
+            Start (24h)
+            <input
+              type="text"
+              id="modalStartTime"
+              placeholder="HH:MM"
+              pattern="([01][0-9]|2[0-3]):[0-5][0-9]"
+              title="24-hour time, e.g. 14:30"
+              inputmode="numeric"
+              autocomplete="off"
+              required
+            />
+          </label>
+          <label>
+            End (24h)
+            <input
+              type="text"
+              id="modalEndTime"
+              placeholder="HH:MM"
+              pattern="([01][0-9]|2[0-3]):[0-5][0-9]"
+              title="24-hour time, e.g. 14:30"
+              inputmode="numeric"
+              autocomplete="off"
+              required
+            />
+          </label>
+        </div>
+        <div class="form-row">
+          <div class="project-field" id="modalProjectField">
+            <label for="modalProjectInput">Project</label>
+            <input
+              type="text"
+              id="modalProjectInput"
+              class="project-picker-input"
+              placeholder="Type to search&hellip;"
+              autocomplete="off"
+            />
+            <input type="hidden" id="modalProject" />
+            <div class="project-picker-popup" id="modalProjectPopup" hidden></div>
+          </div>
+          <label class="grow">
+            Description
+            <input type="text" id="modalDescription" placeholder="Optional details" />
+          </label>
+        </div>
+        <div class="form-actions">
+          <button type="submit" id="modalSubmitBtn" class="modal-submit">Save Entry</button>
+          <span id="modalFormError" class="error" role="alert"></span>
+        </div>
+      </form>
+    </div>
+  </dialog>
+
+  <dialog id="holidayModal" class="entry-modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3 id="holidayModalTitle">Mark as Holiday?</h3>
+        <button type="button" id="holidayModalCloseBtn" class="modal-close" aria-label="Close">&times;</button>
+      </div>
+      <p id="holidayModalText"></p>
+      <div class="form-actions">
+        <button type="button" id="holidayModalConfirmBtn">Mark as Holiday</button>
+        <button type="button" id="holidayModalCancelBtn" class="secondary">Cancel</button>
+      </div>
+    </div>
+  </dialog>
+
+  <script src="common.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

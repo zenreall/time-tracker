@@ -1,0 +1,1156 @@
+html {
+  scrollbar-gutter: stable;
+}
+
+:root {
+  color-scheme: light dark;
+  --bg: #f5f6f8;
+  --card-bg: #ffffff;
+  --text: #1c1f26;
+  --muted: #6b7280;
+  --border: #e2e4e9;
+  --accent: #2563eb;
+  --accent-contrast: #ffffff;
+  --danger: #dc2626;
+  --success: #16a34a;
+  --today-bg: #eaf1ff;
+  --event-bg: rgba(37, 99, 235, 0.12);
+  --now-line: #1a2b6b;
+  --holiday-stripe: #d97706;
+  --radius: 10px;
+  --hour-height: 56px;
+  --visible-hours: 10;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #14161a;
+    --card-bg: #1f2229;
+    --text: #e9eaee;
+    --muted: #9aa0ab;
+    --border: #2c2f37;
+    --accent: #3b82f6;
+    --accent-contrast: #0b0d10;
+    --success: #22c55e;
+    --today-bg: #1e2b44;
+    --event-bg: rgba(59, 130, 246, 0.25);
+    --now-line: #6f9bff;
+    --holiday-stripe: #f59e0b;
+  }
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  padding: 24px 16px 48px;
+  background: var(--bg);
+  color: var(--text);
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  line-height: 1.4;
+}
+
+.top-nav {
+  background: var(--card-bg);
+  border-bottom: 1px solid var(--border);
+  margin-bottom: 24px;
+}
+
+.top-nav-inner {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 0 16px;
+  display: flex;
+  gap: 4px;
+}
+
+.top-nav-link {
+  display: inline-block;
+  padding: 14px 12px;
+  color: var(--muted);
+  text-decoration: none;
+  font-size: 0.95rem;
+  font-weight: 500;
+  border-bottom: 2px solid transparent;
+}
+
+.top-nav-link:hover {
+  color: var(--text);
+}
+
+.top-nav-link.active {
+  color: var(--accent);
+  border-bottom-color: var(--accent);
+}
+
+.app-header {
+  max-width: 960px;
+  margin: 0 auto 24px;
+}
+
+.app-header h1 {
+  margin: 0 0 4px;
+  font-size: 1.6rem;
+}
+
+.subtitle {
+  margin: 0;
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+
+.subtitle code {
+  background: var(--border);
+  padding: 1px 5px;
+  border-radius: 4px;
+}
+
+main {
+  max-width: 960px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.card {
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 20px;
+}
+
+.card h2 {
+  margin: 0 0 16px;
+  font-size: 1.1rem;
+}
+
+.form-row {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-bottom: 12px;
+}
+
+.form-row label {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  font-size: 0.85rem;
+  color: var(--muted);
+  flex: 1 1 160px;
+}
+
+.form-row label.grow {
+  flex: 2 1 240px;
+}
+
+input,
+select {
+  font: inherit;
+  color: var(--text);
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 8px 10px;
+}
+
+input:focus,
+select:focus {
+  outline: 2px solid var(--accent);
+  outline-offset: 1px;
+}
+
+.checkbox-label {
+  flex-direction: row !important;
+  align-items: center;
+  gap: 6px !important;
+}
+
+.checkbox-label input[type='checkbox'] {
+  width: 16px;
+  height: 16px;
+}
+
+input[type='color'] {
+  width: 48px;
+  height: 36px;
+  padding: 2px;
+  cursor: pointer;
+}
+
+.color-dot {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  margin-right: 6px;
+  vertical-align: middle;
+}
+
+#projectsTable input[type='text'] {
+  width: 100%;
+  min-width: 120px;
+}
+
+.form-actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+button {
+  font: inherit;
+  cursor: pointer;
+  border: none;
+  border-radius: 6px;
+  padding: 9px 16px;
+  background: var(--accent);
+  color: var(--accent-contrast);
+  font-weight: 600;
+}
+
+button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+button.secondary {
+  background: transparent;
+  color: var(--text);
+  border: 1px solid var(--border);
+}
+
+button.danger {
+  background: transparent;
+  color: var(--danger);
+  border: 1px solid var(--danger);
+  padding: 5px 10px;
+  font-size: 0.8rem;
+}
+
+.error {
+  color: var(--danger);
+  font-size: 0.85rem;
+}
+
+.summary-grid {
+  display: flex;
+  gap: 32px;
+  margin-bottom: 16px;
+  flex-wrap: wrap;
+}
+
+/* Fixed tile width so Total / Average / Days with entries don't reflow the row when their
+   values change length across granularity tabs (e.g. "0h 0m" vs "1240h 30m"). */
+.summary-card .summary-grid > div {
+  width: 150px;
+}
+
+.summary-label {
+  display: block;
+  color: var(--muted);
+  font-size: 0.8rem;
+}
+
+.summary-value {
+  display: block;
+  font-size: 1.4rem;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.project-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.project-list li {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.9rem;
+  border-top: 1px solid var(--border);
+  padding-top: 6px;
+}
+
+.project-list li:first-child {
+  border-top: none;
+  padding-top: 0;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.9rem;
+}
+
+#projectsTable {
+  table-layout: fixed;
+}
+
+#projectsTable th:nth-child(1),
+#projectsTable td:nth-child(1) {
+  width: 34%;
+}
+
+#projectsTable th:nth-child(2),
+#projectsTable td:nth-child(2) {
+  width: 14%;
+}
+
+#projectsTable th:nth-child(3),
+#projectsTable td:nth-child(3) {
+  width: 12%;
+}
+
+#projectsTable th:nth-child(4),
+#projectsTable td:nth-child(4) {
+  width: 12%;
+}
+
+#projectsTable th:nth-child(5),
+#projectsTable td:nth-child(5) {
+  width: 28%;
+}
+
+th, td {
+  text-align: left;
+  padding: 8px 6px;
+  border-bottom: 1px solid var(--border);
+  vertical-align: top;
+}
+
+th {
+  color: var(--muted);
+  font-weight: 600;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+
+th.sortable {
+  cursor: pointer;
+  user-select: none;
+}
+
+th.sortable:hover {
+  color: var(--text);
+}
+
+th.sortable::after {
+  content: '\2195';
+  display: inline-block;
+  margin-left: 4px;
+  opacity: 0.35;
+}
+
+th.sortable.sort-asc::after {
+  content: '\2191';
+  opacity: 1;
+}
+
+th.sortable.sort-desc::after {
+  content: '\2193';
+  opacity: 1;
+}
+
+td.empty {
+  text-align: center;
+  color: var(--muted);
+  padding: 24px 0;
+}
+
+.row-actions {
+  display: flex;
+  gap: 6px;
+  justify-content: flex-end;
+}
+
+.row-actions button {
+  min-width: 66px;
+  text-align: center;
+}
+
+tr.row-dirty {
+  outline: 2px solid var(--danger);
+  outline-offset: -1px;
+}
+
+.row-actions button[data-action='save']:hover {
+  background: var(--accent);
+  color: var(--accent-contrast);
+  border-color: var(--accent);
+}
+
+.row-actions button[data-action='save'].save-success,
+.row-actions button[data-action='save'].save-success:hover {
+  background: var(--success);
+  color: #ffffff;
+  border-color: var(--success);
+}
+
+.row-actions button.btn-archive:hover {
+  background: var(--danger);
+  color: #ffffff;
+  border-color: var(--danger);
+}
+
+.row-actions button.btn-restore:hover {
+  background: var(--success);
+  color: #ffffff;
+  border-color: var(--success);
+}
+
+.week-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.week-nav {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.week-range {
+  font-size: 0.9rem;
+  color: var(--muted);
+  min-width: 120px;
+  text-align: center;
+}
+
+.period-range-picker {
+  display: inline-flex;
+}
+
+.period-range-trigger {
+  background: transparent;
+  border: 1px solid transparent;
+  font-weight: 500;
+  padding: 5px 8px;
+  width: 140px;
+  white-space: nowrap;
+}
+
+.period-range-trigger:hover,
+.period-range-trigger:focus-visible {
+  background: var(--bg);
+  color: var(--text);
+  border-color: var(--border);
+}
+
+.this-period-btn {
+  width: 120px;
+}
+
+.calendar-scroll {
+  overflow-x: auto;
+}
+
+.calendar-inner {
+  min-width: 850px;
+  user-select: none; /* dragging shouldn't select nearby text (day labels, hour totals, etc.) */
+}
+
+.calendar-header-grid,
+.calendar-body-grid,
+.calendar-totals-grid {
+  display: grid;
+  grid-template-columns: 56px repeat(7, minmax(110px, 1fr));
+}
+
+.calendar-header-grid,
+.calendar-totals-grid {
+  /* the body row's vertical scrollbar eats into its width; match that here so columns line up */
+  padding-right: var(--scrollbar-width, 0px);
+}
+
+.calendar-body-scroll {
+  overflow-y: auto;
+  overflow-x: hidden;
+  height: calc(var(--hour-height) * var(--visible-hours));
+}
+
+.calendar-corner {
+  border-bottom: 2px solid var(--border);
+}
+
+.calendar-day-header {
+  text-align: center;
+  font-size: 0.75rem;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  padding: 8px 4px;
+  border-bottom: 2px solid var(--border);
+  line-height: 1.5;
+  cursor: pointer;
+}
+
+.calendar-day-header.today {
+  color: var(--accent);
+  background: var(--today-bg);
+}
+
+.calendar-time-axis {
+  position: relative;
+  height: calc(var(--hour-height) * 24);
+  border-right: 1px solid var(--border);
+}
+
+.hour-label {
+  position: absolute;
+  right: 6px;
+  transform: translateY(-50%);
+  font-size: 0.68rem;
+  color: var(--muted);
+  white-space: nowrap;
+}
+
+.calendar-day-col {
+  position: relative;
+  height: calc(var(--hour-height) * 24);
+  border-right: 1px solid var(--border);
+  cursor: crosshair;
+  touch-action: none;
+  background-image: repeating-linear-gradient(
+    to bottom,
+    var(--border) 0,
+    var(--border) 1px,
+    transparent 1px,
+    transparent var(--hour-height)
+  );
+}
+
+.calendar-day-col.today {
+  background-color: var(--today-bg);
+}
+
+/* Diagonal-stripe markers for non-work days: an explicit holiday (amber) takes precedence over a
+   regular non-work day from the Settings schedule (gray) when a date is somehow both (app.js only
+   ever applies one class or the other). Both combine with the base .calendar-day-col hour-line
+   background via --stripe-color rather than overriding it outright, since background-image doesn't
+   merge across rules — a plain .holiday-only declaration would replace the hour lines instead of
+   layering over them. */
+.calendar-day-col.holiday,
+.calendar-day-col.non-work-day {
+  background-image:
+    repeating-linear-gradient(135deg, var(--stripe-color) 0, var(--stripe-color) 2px, transparent 2px, transparent 10px),
+    repeating-linear-gradient(to bottom, var(--border) 0, var(--border) 1px, transparent 1px, transparent var(--hour-height));
+}
+
+.calendar-day-col.holiday {
+  --stripe-color: color-mix(in srgb, var(--holiday-stripe) 30%, transparent);
+}
+
+.calendar-day-col.non-work-day {
+  --stripe-color: color-mix(in srgb, var(--muted) 30%, transparent);
+}
+
+.calendar-now-line {
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: var(--now-line);
+  pointer-events: none;
+  z-index: 5;
+}
+
+.calendar-event {
+  position: absolute;
+  background: var(--event-bg);
+  border-left: 3px solid var(--accent);
+  border-radius: 4px;
+  padding: 1px 5px;
+  min-height: 18px;
+  overflow: hidden;
+  cursor: grab;
+  touch-action: none;
+}
+
+.calendar-event:hover {
+  outline: 2px solid var(--accent);
+  outline-offset: -1px;
+}
+
+.calendar-event.dragging {
+  cursor: grabbing;
+  opacity: 0.85;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.25);
+  z-index: 50;
+}
+
+.event-resize-handle {
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 6px;
+  cursor: ns-resize;
+}
+
+.event-resize-handle.handle-top {
+  top: 0;
+}
+
+.event-resize-handle.handle-bottom {
+  bottom: 0;
+}
+
+.event-resize-handle:hover {
+  background: color-mix(in srgb, var(--accent) 35%, transparent);
+}
+
+.calendar-event-preview {
+  position: absolute;
+  border: 1px dashed var(--accent);
+  background: color-mix(in srgb, var(--accent) 12%, transparent);
+  border-radius: 4px;
+  padding: 1px 5px;
+  min-height: 18px;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.calendar-event .ce-project {
+  display: block;
+  font-weight: 600;
+  font-size: 0.7rem;
+  line-height: 1.2;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.calendar-event .ce-time {
+  display: block;
+  color: var(--muted);
+  font-size: 0.65rem;
+  line-height: 1.2;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.calendar-event .ce-time[hidden] {
+  display: none;
+}
+
+.calendar-total-cell {
+  text-align: center;
+  font-weight: 600;
+  font-size: 0.8rem;
+  padding: 8px 4px;
+  border-top: 2px solid var(--border);
+  background: var(--bg);
+}
+
+
+.entry-modal {
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 0;
+  background: var(--card-bg);
+  color: var(--text);
+  width: min(480px, calc(100vw - 32px));
+}
+
+.entry-modal::backdrop {
+  background: rgba(0, 0, 0, 0.4);
+}
+
+.modal-content {
+  padding: 20px;
+}
+
+.modal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 16px;
+}
+
+.modal-header h3 {
+  margin: 0;
+  font-size: 1.1rem;
+}
+
+.modal-close {
+  background: transparent;
+  color: var(--muted);
+  padding: 2px 8px;
+  font-size: 1.2rem;
+  line-height: 1;
+  border-radius: 6px;
+}
+
+.modal-close:hover {
+  background: var(--bg);
+  color: var(--text);
+}
+
+.modal-header-actions {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.modal-options {
+  position: relative;
+}
+
+.modal-icon-btn {
+  background: transparent;
+  color: var(--muted);
+  padding: 2px 8px;
+  font-size: 1.1rem;
+  line-height: 1;
+  border-radius: 6px;
+}
+
+.modal-icon-btn:hover {
+  background: var(--bg);
+  color: var(--text);
+}
+
+.modal-options-menu {
+  position: absolute;
+  top: calc(100% + 4px);
+  right: 0;
+  display: flex;
+  flex-direction: column;
+  min-width: 130px;
+  padding: 4px;
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  z-index: 10;
+}
+
+.modal-options-menu[hidden] {
+  display: none;
+}
+
+.modal-options-item {
+  background: transparent;
+  color: var(--text);
+  font-weight: 400;
+  text-align: left;
+  padding: 8px 10px;
+  border-radius: 6px;
+}
+
+.modal-options-item:hover {
+  background: var(--bg);
+}
+
+.modal-options-item-danger {
+  color: var(--danger);
+}
+
+.date-field {
+  flex: 0 1 200px;
+}
+
+.date-picker {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  font-size: 0.85rem;
+  color: var(--muted);
+}
+
+.date-picker label {
+  /* .form-row label's flex-basis:160px is meant for horizontal fields; in this column-direction
+     flex container it would be read as a height, ballooning the label instead of sizing width. */
+  display: block;
+  flex: none;
+}
+
+.date-picker-input {
+  cursor: pointer;
+}
+
+.date-picker-popup {
+  /* Fixed (not absolute) so it's positioned relative to the viewport instead of the dialog —
+     an absolutely positioned popup here would count toward the dialog's scrollable overflow
+     and force a scrollbar on the whole modal once it's tall enough to spill past the form. */
+  position: fixed;
+  width: 240px;
+  padding: 8px;
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  z-index: 10;
+}
+
+.date-picker-popup[hidden] {
+  display: none;
+}
+
+.date-picker-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 6px;
+}
+
+.date-picker-month-label {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--text);
+}
+
+.date-picker-nav {
+  background: transparent;
+  color: var(--muted);
+  padding: 2px 8px;
+  font-size: 1rem;
+  line-height: 1;
+  border-radius: 6px;
+}
+
+.date-picker-nav:hover {
+  background: var(--bg);
+  color: var(--text);
+}
+
+.date-picker-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 2px;
+}
+
+.date-picker-weekday {
+  text-align: center;
+  font-size: 0.65rem;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  padding-bottom: 4px;
+}
+
+.date-picker-day {
+  background: transparent;
+  color: var(--text);
+  font-weight: 400;
+  text-align: center;
+  padding: 5px 0;
+  border-radius: 6px;
+  font-size: 0.8rem;
+}
+
+.date-picker-day:hover,
+.date-picker-day.week-hover {
+  background: var(--bg);
+}
+
+.date-picker-day.outside {
+  color: var(--muted);
+  opacity: 0.6;
+}
+
+.date-picker-day.today {
+  outline: 1px solid var(--accent);
+  outline-offset: -1px;
+}
+
+.date-picker-day.selected {
+  background: var(--accent);
+  color: var(--accent-contrast);
+}
+
+.date-picker-grid-months {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 4px;
+}
+
+.project-field {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  font-size: 0.85rem;
+  color: var(--muted);
+  flex: 1 1 160px;
+}
+
+.project-field label {
+  /* Same fix as .date-picker label: .form-row label's flex-basis:160px is meant for horizontal
+     fields; in this column-direction flex container it would be read as a height instead. */
+  display: block;
+  flex: none;
+}
+
+.project-picker-popup {
+  /* Fixed for the same reason as .date-picker-popup — see its comment. */
+  position: fixed;
+  width: 240px;
+  max-height: 220px;
+  overflow-y: auto;
+  padding: 4px;
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  z-index: 10;
+}
+
+.project-picker-popup[hidden] {
+  display: none;
+}
+
+.project-picker-option {
+  display: block;
+  width: 100%;
+  background: transparent;
+  color: var(--text);
+  font-weight: 400;
+  text-align: left;
+  padding: 7px 8px;
+  border-radius: 6px;
+  font-size: 0.85rem;
+}
+
+.project-picker-option:hover,
+.project-picker-option.highlighted {
+  background: var(--bg);
+}
+
+.project-picker-empty {
+  padding: 7px 8px;
+  color: var(--muted);
+  font-size: 0.85rem;
+}
+
+.modal-submit {
+  padding: 7px 14px;
+  font-size: 0.9rem;
+}
+
+/* Recap tab */
+
+.granularity-tabs {
+  display: flex;
+  gap: 4px;
+}
+
+.granularity-tabs button {
+  background: transparent;
+  color: var(--muted);
+  border: 1px solid var(--border);
+  padding: 6px 12px;
+  font-size: 0.85rem;
+  font-weight: 500;
+}
+
+.granularity-tabs button.active {
+  background: var(--accent);
+  color: var(--accent-contrast);
+  border-color: var(--accent);
+}
+
+.granularity-row {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 12px;
+}
+
+.bar-row {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.bar-row-header {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.9rem;
+}
+
+.bar-track {
+  height: 6px;
+  border-radius: 3px;
+  background: var(--bg);
+  overflow: hidden;
+}
+
+.bar-fill {
+  height: 100%;
+  border-radius: 3px;
+}
+
+.ipbox-legend {
+  display: flex;
+  gap: 16px;
+  margin-bottom: 8px;
+  font-size: 0.85rem;
+  color: var(--muted);
+}
+
+.ipbox-legend-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.ipbox-legend-swatch {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  border-radius: 2px;
+}
+
+.ipbox-swatch-yes {
+  background: var(--accent);
+}
+
+.ipbox-swatch-no {
+  background: var(--border);
+}
+
+.ipbox-bar {
+  display: flex;
+  height: 20px;
+  border-radius: var(--radius);
+  overflow: hidden;
+  margin-bottom: 16px;
+}
+
+.ipbox-bar-segment {
+  height: 100%;
+  width: 100%;
+}
+
+.ipbox-trend {
+  display: flex;
+  align-items: stretch;
+  gap: 2px;
+  height: 48px;
+}
+
+.ipbox-trend-col {
+  flex: 1 1 0;
+  height: 100%;
+}
+
+.ipbox-trend-bar {
+  height: 100%;
+  display: flex;
+  flex-direction: column-reverse;
+}
+
+.trend-chart-scroll {
+  overflow-x: auto;
+}
+
+.trend-chart {
+  display: flex;
+  gap: 2px;
+}
+
+.trend-col {
+  flex: 1 1 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+}
+
+.trend-bar-area {
+  width: 100%;
+  height: 160px;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+}
+
+.trend-bar {
+  width: 100%;
+  background: var(--accent);
+  border-radius: 3px 3px 0 0;
+  display: flex;
+  flex-direction: column-reverse;
+}
+
+.trend-segment {
+  width: 100%;
+}
+
+.trend-segment:not(:first-child) {
+  border-top: 2px solid var(--card-bg);
+}
+
+.trend-bar-label {
+  font-size: 0.68rem;
+  color: var(--muted);
+  white-space: nowrap;
+}
+
+/* Settings tab */
+
+.weekday-field {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  font-size: 0.85rem;
+  color: var(--muted);
+  flex: 2 1 320px;
+}
+
+.weekday-toggle-group {
+  display: flex;
+  gap: 4px;
+  flex-wrap: wrap;
+}
+
+.weekday-toggle {
+  background: transparent;
+  color: var(--muted);
+  border: 1px solid var(--border);
+  padding: 6px 10px;
+  font-size: 0.85rem;
+  font-weight: 500;
+}
+
+.weekday-toggle.active {
+  background: var(--accent);
+  color: var(--accent-contrast);
+  border-color: var(--accent);
+}
+
+.weekday-count {
+  font-size: 0.8rem;
+  color: var(--muted);
+}
+
+tr.settings-row-active {
+  background: var(--today-bg);
+}
+
+.settings-active-badge {
+  display: inline-block;
+  margin-left: 8px;
+  padding: 2px 8px;
+  border-radius: 999px;
+  background: var(--accent);
+  color: var(--accent-contrast);
+  font-size: 0.7rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}

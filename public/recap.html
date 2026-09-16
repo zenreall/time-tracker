@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Recap &middot; Time Tracker</title>
+  <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <nav class="top-nav">
+    <div class="top-nav-inner">
+      <a href="/" class="top-nav-link">Time Tracker</a>
+      <a href="/recap" class="top-nav-link active">Recap</a>
+      <a href="/projects" class="top-nav-link">Projects</a>
+      <a href="/settings" class="top-nav-link">Settings</a>
+    </div>
+  </nav>
+  <header class="app-header">
+    <h1>Recap</h1>
+    <p class="subtitle">Analytics and trends across your tracked time</p>
+  </header>
+
+  <main>
+    <section class="card">
+      <div class="week-header">
+        <h2 id="periodTitle">This Week</h2>
+        <div class="week-nav">
+          <button type="button" class="secondary" id="prevPeriodBtn">&larr; Prev</button>
+          <div class="period-range-picker" id="periodRangeField">
+            <button type="button" id="periodRangeLabel" class="week-range period-range-trigger"></button>
+            <div class="date-picker-popup" id="periodRangePopup" hidden></div>
+          </div>
+          <button type="button" class="secondary" id="nextPeriodBtn">Next &rarr;</button>
+          <button type="button" class="secondary this-period-btn" id="thisPeriodBtn">This week</button>
+        </div>
+      </div>
+      <div class="granularity-row">
+        <div class="granularity-tabs" id="granularityTabs">
+          <button type="button" data-granularity="day">Day</button>
+          <button type="button" data-granularity="week" class="active">Week</button>
+          <button type="button" data-granularity="month">Month</button>
+          <button type="button" data-granularity="year">Year</button>
+        </div>
+      </div>
+    </section>
+
+    <section class="card summary-card">
+      <h2>Summary</h2>
+      <div class="summary-grid">
+        <div>
+          <span class="summary-label">Total</span>
+          <span class="summary-value" id="summaryTotal">0h 0m</span>
+        </div>
+        <div>
+          <span class="summary-label">Average / day</span>
+          <span class="summary-value" id="summaryAvgPerDay">0h 0m</span>
+        </div>
+        <div>
+          <span class="summary-label">Days with entries</span>
+          <span class="summary-value" id="summaryActiveDays">0 / 0</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="card">
+      <h2>By project</h2>
+      <ul id="projectBreakdown" class="project-list bar-list"></ul>
+    </section>
+
+    <section class="card">
+      <h2>IP Box</h2>
+      <div class="summary-grid">
+        <div>
+          <span class="summary-label">IP Box hours</span>
+          <span class="summary-value" id="ipBoxMinutes">0h 0m</span>
+        </div>
+        <div>
+          <span class="summary-label">Non-IP Box hours</span>
+          <span class="summary-value" id="nonIpBoxMinutes">0h 0m</span>
+        </div>
+        <div>
+          <span class="summary-label">IP Box share</span>
+          <span class="summary-value" id="ipBoxPercent">0%</span>
+        </div>
+      </div>
+      <div class="ipbox-legend">
+        <span class="ipbox-legend-item"><span class="ipbox-legend-swatch ipbox-swatch-yes"></span>IP Box</span>
+        <span class="ipbox-legend-item"><span class="ipbox-legend-swatch ipbox-swatch-no"></span>Non-IP Box</span>
+      </div>
+      <div class="ipbox-bar" id="ipBoxRatioBar"></div>
+      <h3>Trend</h3>
+      <div class="ipbox-trend" id="ipBoxTrendChart"></div>
+    </section>
+
+    <section class="card">
+      <div class="week-header">
+        <h2>Trend</h2>
+        <label class="checkbox-label">
+          <input type="checkbox" id="trendStackByProject" />
+          Stack by project
+        </label>
+      </div>
+      <p id="trendNotApplicable" class="error" hidden>Pick Week, Month, or Year to see a trend over time.</p>
+      <div class="trend-chart-scroll" id="trendChartScroll">
+        <div class="trend-chart" id="trendChart"></div>
+      </div>
+    </section>
+  </main>
+
+  <script src="common.js"></script>
+  <script src="recap.js"></script>
+</body>
+</html>
